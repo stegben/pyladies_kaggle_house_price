@@ -10,3 +10,8 @@ Create a folder `raw_data`. Put `train.csv` and `test.csv` in it.
 ```
 pip install -Ur requirements.txt
 ```
+
+## Generate Data
+```
+python run.py
+```
