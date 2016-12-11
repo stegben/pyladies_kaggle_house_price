@@ -11,8 +11,7 @@ from sklearn.ensemble import RandomForestRegressor
 import matplotlib.pyplot as plt
 
 
-def main():
-
+if __name__ == '__main__':
     # Data preprocessing
     df_train = pd.read_csv('./raw_data/train.csv')
     df_test = pd.read_csv('./raw_data/test.csv')
@@ -100,7 +99,3 @@ def main():
     pd.DataFrame({'Id': id_test, 'SalePrice': prediction}).to_csv('sub.csv', index=False)
 
     import ipdb; ipdb.set_trace()
-
-
-if __name__ == '__main__':
-    main()
