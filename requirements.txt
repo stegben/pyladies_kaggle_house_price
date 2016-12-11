@@ -1,7 +1,6 @@
-numpy
-pandas
-scipy
-scikit-learn
-flask
-ipdb
-matplotlib
+numpy==1.11.2
+pandas==0.19.1
+scipy==0.18.1
+scikit-learn==0.18.1
+ipdb==0.10.1
+matplotlib==1.5.3
