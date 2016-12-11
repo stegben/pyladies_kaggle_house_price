@@ -2,16 +2,13 @@ import numpy as np
 import scipy as sp
 import pandas as pd
 
-
 from sklearn.model_selection import ShuffleSplit
-
 from sklearn.metrics import mean_squared_error
 
 # from sklearn.linear_model import Ridge
 from sklearn.ensemble import RandomForestRegressor
 
 import matplotlib.pyplot as plt
-
 
 
 def main():
@@ -98,7 +95,6 @@ def main():
 
     #     print('MSLE of subtrain: {}'.format(subtrain_error))
     #     print('MSLE of validation: {}'.format(validation_error))
-
 
     prediction = np.expm1(rgs.predict(x_test))
     pd.DataFrame({'Id': id_test, 'SalePrice': prediction}).to_csv('sub.csv', index=False)
