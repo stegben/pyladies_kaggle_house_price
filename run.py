@@ -1,3 +1,5 @@
+import sys
+
 import numpy as np
 import scipy as sp
 import pandas as pd
@@ -12,6 +14,7 @@ import matplotlib.pyplot as plt
 
 
 if __name__ == '__main__':
+    sub_fname = sys.argv[1]
     # Data preprocessing
     df_train = pd.read_csv('./raw_data/train.csv')
     df_test = pd.read_csv('./raw_data/test.csv')
@@ -96,6 +99,6 @@ if __name__ == '__main__':
     #     print('MSLE of validation: {}'.format(validation_error))
 
     prediction = np.expm1(rgs.predict(x_test))
-    pd.DataFrame({'Id': id_test, 'SalePrice': prediction}).to_csv('sub.csv', index=False)
+    pd.DataFrame({'Id': id_test, 'SalePrice': prediction}).to_csv(sub_fname, index=False)
 
     import ipdb; ipdb.set_trace()

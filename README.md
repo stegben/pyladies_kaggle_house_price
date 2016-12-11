@@ -12,6 +12,7 @@ pip install -Ur requirements.txt
 ```
 
 ## Generate Data
+Run the following command. The first parameter is the submission file name.
 ```
-python run.py
+python run.py sub.csv
 ```
