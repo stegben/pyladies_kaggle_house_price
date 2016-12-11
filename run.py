@@ -22,7 +22,10 @@ RF_PARAM_GRID = [{
 
 if __name__ == '__main__':
     sub_fname = sys.argv[1]
+
+    ##############################################
     # Data preprocessing
+    ##############################################
     df_train = pd.read_csv('./raw_data/train.csv')
     df_test = pd.read_csv('./raw_data/test.csv')
 
@@ -37,10 +40,11 @@ if __name__ == '__main__':
     # perform some EDA here
     # e.g. df_all['LotArea'].hist(bins=100)
     # df_all['LotArea'].hist(bins=100)
-    # GrLivArea
-    import ipdb; ipdb.set_trace()
+    # import ipdb; ipdb.set_trace()
 
+    ##############################################
     # feature engineering
+    ##############################################
     df_all['MSSubClass'] = df_all['MSSubClass'].astype(object)
     df_all['MoSold'] = df_all['MoSold'].astype(object)
     df_all['Age'] = df_all['YrSold'] - df_all['YearBuilt']
@@ -61,7 +65,11 @@ if __name__ == '__main__':
     x_test = df_test_feature.values
     id_test = df_test['Id']
 
-    # Train Model by searching for all parameter combination
+    ##############################################
+    # Train Model
+    ##############################################
+
+    # search for all parameter combination
     rgs_cv = GridSearchCV(RandomForestRegressor(),
         param_grid=RF_PARAM_GRID,
         scoring='neg_mean_squared_error',
@@ -92,6 +100,9 @@ if __name__ == '__main__':
     #     print('MSLE of subtrain: {}'.format(subtrain_error))
     #     print('MSLE of validation: {}'.format(validation_error))
 
+    ##############################################
+    # Generate prediction file
+    ##############################################
     prediction = np.expm1(rgs.predict(x_test))
     pd.DataFrame({'Id': id_test, 'SalePrice': prediction}).to_csv(sub_fname, index=False)
 
