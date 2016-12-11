@@ -5,13 +5,20 @@ import scipy as sp
 import pandas as pd
 
 from sklearn.model_selection import ShuffleSplit
+from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import mean_squared_error
-
 # from sklearn.linear_model import Ridge
 from sklearn.ensemble import RandomForestRegressor
 
 import matplotlib.pyplot as plt
 
+
+RF_PARAM_GRID = [{
+    'n_estimators': [200],
+    'n_jobs': [-1],
+    'max_features': [0.4, 0.2],
+    'max_depth': [20, 25, None],
+}]
 
 if __name__ == '__main__':
     sub_fname = sys.argv[1]
@@ -54,20 +61,7 @@ if __name__ == '__main__':
     x_test = df_test_feature.values
     id_test = df_test['Id']
 
-    try:
-        from sklearn.cross_validation import GridSearchCV
-    except:
-        try:
-            from sklearn.model_selection import GridSearchCV
-        except:
-            raise("NOOOOOOOOOOOOOOOOOOOOOOOO!")
-
-    RF_PARAM_GRID = [{
-        'n_estimators': [20],
-        'n_jobs': [-1],
-        'max_features': [0.4, 0.2],
-        'max_depth': [20, 25, None],
-    }]
+    # Train Model by searching for all parameter combination
     rgs_cv = GridSearchCV(RandomForestRegressor(),
         param_grid=RF_PARAM_GRID,
         scoring='neg_mean_squared_error',
